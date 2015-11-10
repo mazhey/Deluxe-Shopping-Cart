@@ -1,9 +1,7 @@
 package model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.math.BigDecimal;
 
 
@@ -12,14 +10,14 @@ import java.math.BigDecimal;
  * 
  */
 @Entity
-@Table(name="LINEITEMS",schema="TESTUSERDB")
+@Table(name="LINEITEMS", schema= "TESTUSERDB")
 @NamedQuery(name="Lineitem.findAll", query="SELECT l FROM Lineitem l")
 public class Lineitem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="LINEITEMS_LINEITEMID_GENERATOR",sequenceName="SEQ_LINEITEMS",allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="LINEITEMS_LINEITEMID_GENERATOR")
+	@SequenceGenerator(name="LINEITEMS_LINEITEMID_GENERATOR", sequenceName="LINEITEMS_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LINEITEMS_LINEITEMID_GENERATOR")
 	@Column(name="LINEITEM_ID")
 	private long lineitemId;
 

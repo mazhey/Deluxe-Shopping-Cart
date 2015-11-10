@@ -9,6 +9,7 @@ public class LineitemJB {
 	private long productId;
 	private long userId;
 	private String productname;
+	private String date;
 	private double price;
 	private int  quantity;
 	private double unitPrice;
@@ -61,4 +62,11 @@ public class LineitemJB {
 	public void setLineitemList(ArrayList<LineitemJB> lineitemList) {
 		this.lineitemList = lineitemList;
 	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
 }

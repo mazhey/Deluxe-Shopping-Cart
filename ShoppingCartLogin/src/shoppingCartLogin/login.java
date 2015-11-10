@@ -123,11 +123,11 @@ public class login extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("myUser", myUser);
 		request.setAttribute("userProfile", myUser);
-		request.setAttribute("tweetsList", tweetsList);
+		request.setAttribute("LineitemList", LineitemList);
 		boolean loginFlag = true;
 		session.setAttribute("loginFlag", loginFlag);
 		getServletContext()
-		.getRequestDispatcher("/UserProfile.jsp")
+		.getRequestDispatcher("/#.jsp")
 		.forward(request, response);
 	}
 

@@ -27,6 +27,8 @@ public class Shoppinguser implements Serializable {
 	private String password;
 
 	private String username;
+	private Shoppinguser shoppinguser; 
+	private List<Lineitem> lineitems;
 
 	public Shoppinguser() {
 	}
@@ -64,8 +66,24 @@ public class Shoppinguser implements Serializable {
 	}
 
 	public List<Lineitem> getLineitems() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("inside getLineitems()");
+		return this.lineitems;
 	}
 
+	public void setLineitems(List<Lineitem> lineitems) {
+		this.lineitems = lineitems;
+	}
+
+	 public Lineitem addLineitem(Lineitem lineitem){
+     	getLineitems().add(lineitem);
+     	lineitem.setShoppinguser(this);
+     	return lineitem;
+     }
+     
+     
+      public Lineitem removeLineitem(Lineitem lineitem){
+     	getLineitems().remove(lineitem);
+     	lineitem.setShoppinguser(null);
+     	return lineitem;
+     }
 }
