@@ -60,13 +60,14 @@ public class decisionShopping extends HttpServlet {
 		double subtotal = quantity*productprice;
 		System.out.println(quantity);
 		Lineitem myLineitem = new Lineitem();
-		myLineitem.setLineitemId(myLineitem.getLineitemId());
+		//myLineitem.setLineitemId(1);
 		myLineitem.setProductId(productID);
 		myLineitem.setProductDate(strproductDate);
 		myLineitem.setProductQuantity(quantity);
 		myLineitem.setProductUnitprice(productprice);
 		myLineitem.setProductDate(strproductDate);
 		myLineitem.setProductPrice(subtotal);
+		//myLineitem.setUserId(1);
 		LineitemDB.insert(myLineitem);
 		
 		LineitemJB lineitemJB= new LineitemJB();
@@ -77,9 +78,12 @@ public class decisionShopping extends HttpServlet {
 		lineitemJB.setUnitPrice(productprice);
 		lineitemJB.setQuantity(quantity);
 	
-		ArrayList<LineitemJB> MyshoppingCart =new ArrayList<LineitemJB>();
+		ArrayList<LineitemJB> MyshoppingCart;
 		 HttpSession session = request.getSession();
 		MyshoppingCart=(ArrayList<LineitemJB>) session.getAttribute("MyshoppingCart");
+		if(MyshoppingCart == null){
+			MyshoppingCart = new ArrayList<LineitemJB>();
+		}
 		 MyshoppingCart.add(lineitemJB);
 		 double total=0;
 		 for(int i=0;i< MyshoppingCart.size();i++){

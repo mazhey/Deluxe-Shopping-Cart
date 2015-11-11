@@ -12,14 +12,14 @@ import java.math.BigDecimal;
  * 
  */
 @Entity
-@Table(name="PRODUCTS",schema="TESTUSERDB")
+@Table(name="PRODUCTS",schema= "TESTUSERDB")
 @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRODUCTS_PRODUCTID_GENERATOR",sequenceName="SEQ_PRODUCTS",allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="PRODUCTS_PRODUCTID_GENERATOR")
+	@SequenceGenerator(name="PRODUCTS_GENERATOR", sequenceName="PRODUCTS_SEQ",schema= "TESTUSERDB",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="PRODUCTS_GENERATOR")
 	@Column(name="PRODUCT_ID")
 	private long productId;
 
@@ -33,7 +33,7 @@ public class Product implements Serializable {
 	private String productName;
 
 	@Column(name="PRODUCT_PRICE")
-	private double productPrice;
+	private BigDecimal productPrice;
 
 	public Product() {
 	}
@@ -70,11 +70,11 @@ public class Product implements Serializable {
 		this.productName = productName;
 	}
 
-	public double getProductPrice() {
+	public BigDecimal getProductPrice() {
 		return this.productPrice;
 	}
 
-	public void setProductPrice(double productPrice) {
+	public void setProductPrice(BigDecimal productPrice) {
 		this.productPrice = productPrice;
 	}
 

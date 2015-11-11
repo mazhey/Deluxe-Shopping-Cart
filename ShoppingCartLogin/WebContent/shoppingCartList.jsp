@@ -29,6 +29,25 @@
             <span class="icon-bar"></span>
           </button>
           
+           <c:if test="${loginFlag== true}">
+          <a class="navbar-brand">Twitter!</a> 
+             </c:if>
+                <c:if test="${loginFlag!= true}">
+          <a class="navbar-brand" href="index.html">Twitter!</a> 
+             </c:if>
+          <c:if test="${loginFlag== true}">
+           <a class="navbar-brand" href="NewTweet.jsp">Share a Tweet!</a>
+         </c:if>
+         
+          <a class="navbar-brand" href="http://localhost:8080/BullhornWebApplication/tweetServlet">Tweets</a>
+          <c:if test="${loginFlag== true}">
+          <a class="navbar-brand" href="http://localhost:8080/BullhornWebApplication/UserProfileServlet?username=${myUser.username}">Profile</a>
+          </c:if>
+          <c:if test="${ loginFlag == true }">
+				<a class="navbar-brand" href="LogoutServlet">Log Out</a>
+       		</c:if>
+         
+         
           <a class="navbar-brand">Lineitems List </a> 
            
               

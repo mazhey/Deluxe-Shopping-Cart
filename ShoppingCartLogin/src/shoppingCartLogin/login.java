@@ -86,7 +86,7 @@ public class login extends HttpServlet {
 			boolean loginFlag = true;
 			session.setAttribute("loginFlag", loginFlag);
 			getServletContext()
-			.getRequestDispatcher("/UserProfile.jsp")
+			.getRequestDispatcher("/shoppingCartList.jsp")
 			.forward(request, response);
 		}
 	}
@@ -99,7 +99,7 @@ public class login extends HttpServlet {
 		List<Lineitem> LineitemList = null;
 
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
-		String qString = "Select u from User u where u.username = :username and u.password = :password ";
+		String qString = "Select u from Shoppinguser u where u.username = :username and u.password = :password ";
 		TypedQuery<Shoppinguser> u = em.createQuery(qString, Shoppinguser.class);
 		u.setParameter("username", username);
 		u.setParameter("password", password);
@@ -114,7 +114,7 @@ public class login extends HttpServlet {
 				myUser.setFullname(users.get(0).getFullname());
 				myUser.setUsername(users.get(0).getUsername());
 				myUser.setUserId(users.get(0).getUserId());
-				LineitemList = users.get(0).getLineitems();
+				//LineitemList = users.get(0).getLineitems();
 			}
 		}finally{
 			em.close();  
@@ -122,12 +122,11 @@ public class login extends HttpServlet {
 		//add the record count to a session
 		HttpSession session = request.getSession();
 		session.setAttribute("myUser", myUser);
-		request.setAttribute("userProfile", myUser);
 		request.setAttribute("LineitemList", LineitemList);
 		boolean loginFlag = true;
 		session.setAttribute("loginFlag", loginFlag);
 		getServletContext()
-		.getRequestDispatcher("/#.jsp")
+		.getRequestDispatcher("/ShopCartServlet")
 		.forward(request, response);
 	}
 

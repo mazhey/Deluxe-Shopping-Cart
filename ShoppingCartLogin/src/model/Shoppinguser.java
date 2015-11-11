@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -11,14 +10,14 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="SHOPPINGUSER",schema="TESTUSERDB")
+@Table(name="SHOPPINGUSER",schema= "TESTUSERDB")
 @NamedQuery(name="Shoppinguser.findAll", query="SELECT s FROM Shoppinguser s")
 public class Shoppinguser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SHOPPINGUSER_USERID_GENERATOR",sequenceName="SEQ_SHOPPINGUSER",allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="SHOPPINGUSER_USERID_GENERATOR")
+	@SequenceGenerator(name="SHOPPINGUSER_GENERATOR", sequenceName="SHOPPINGUSER_SEQ",schema= "TESTUSERDB",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="SHOPPINGUSER_GENERATOR")
 	@Column(name="USER_ID")
 	private long userId;
 
@@ -27,8 +26,6 @@ public class Shoppinguser implements Serializable {
 	private String password;
 
 	private String username;
-	private Shoppinguser shoppinguser; 
-	private List<Lineitem> lineitems;
 
 	public Shoppinguser() {
 	}
@@ -65,25 +62,4 @@ public class Shoppinguser implements Serializable {
 		this.username = username;
 	}
 
-	public List<Lineitem> getLineitems() {
-		System.out.println("inside getLineitems()");
-		return this.lineitems;
-	}
-
-	public void setLineitems(List<Lineitem> lineitems) {
-		this.lineitems = lineitems;
-	}
-
-	 public Lineitem addLineitem(Lineitem lineitem){
-     	getLineitems().add(lineitem);
-     	lineitem.setShoppinguser(this);
-     	return lineitem;
-     }
-     
-     
-      public Lineitem removeLineitem(Lineitem lineitem){
-     	getLineitems().remove(lineitem);
-     	lineitem.setShoppinguser(null);
-     	return lineitem;
-     }
 }
