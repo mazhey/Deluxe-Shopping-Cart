@@ -28,8 +28,26 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+           <c:if test="${loginFlag== true}">
+          <a class="navbar-brand">ShoppingCart!</a> 
+             </c:if>
+                <c:if test="${loginFlag!= true}">
+          <a class="navbar-brand" href="index.html">ShoppingCart!</a> 
+             </c:if>
+         
+          <a class="navbar-brand" href="ShopCartServlet">Products Pool</a>
+          <c:if test="${loginFlag== true}">
+          <a class="navbar-brand" href="#">${myUser.username}</a>
+          </c:if>
+           <c:if test="${loginFlag == true }">
+				 <a class="navbar-brand">Selected Products </a> 
+       		</c:if>
           
-          <a class="navbar-brand">Selected Products </a> 
+          <c:if test="${loginFlag == true }">
+				<a class="navbar-brand" href="LogoutServlet">Log Out</a>
+       		</c:if>
+          
+      
            
               
         </div>
@@ -41,7 +59,7 @@
 <div class="panel panel-default">
 
   <div class="panel-body">
-  <form action = "decisionShopping" method= "get">
+  <form action = "decisionShopping" method= "post">
   <input type="hidden" name="action" value="Add">
 		<table class="table table-striped">
 <thead>

@@ -75,7 +75,7 @@ public class UserDB {
 		
 		public static Shoppinguser selectUserID(String username){
 			EntityManager em = DBUtil.getEmFactory().createEntityManager();
-			String qString = "select u from User u where u.username = :username";
+			String qString = "select u from Shoppinguser u where u.username = :username";
 			TypedQuery<Shoppinguser> q = em.createQuery(qString, Shoppinguser.class);
 			q.setParameter("username", username);
 			Shoppinguser shoppinguser = null;

@@ -69,7 +69,7 @@ public class login extends HttpServlet {
 			}catch (Exception e){
 				System.out.println("The insert did not work");
 			}
-			UserJB userBean = new UserJB();
+			 Shoppinguser  userBean = new  Shoppinguser ();
 			Shoppinguser temp = UserDB.selectUserID(myUser.getUsername());
 			userBean.setUserId(temp.getUserId());
 			userBean.setFullname(temp.getFullname());
@@ -81,12 +81,12 @@ public class login extends HttpServlet {
 			System.out.println(userBean.getFullname());
 			//add the record count to a session
 			HttpSession session = request.getSession();
-			session.setAttribute("userProfile", userBean);
+			//session.setAttribute("userProfile", userBean);
 			session.setAttribute("myUser", userBean);
 			boolean loginFlag = true;
 			session.setAttribute("loginFlag", loginFlag);
 			getServletContext()
-			.getRequestDispatcher("/shoppingCartList.jsp")
+			.getRequestDispatcher("/ShopCartServlet")
 			.forward(request, response);
 		}
 	}
@@ -95,7 +95,7 @@ public class login extends HttpServlet {
 			throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");	
-		UserJB myUser = new UserJB();
+	     Shoppinguser myUser = new  Shoppinguser();
 		List<Lineitem> LineitemList = null;
 
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -114,7 +114,7 @@ public class login extends HttpServlet {
 				myUser.setFullname(users.get(0).getFullname());
 				myUser.setUsername(users.get(0).getUsername());
 				myUser.setUserId(users.get(0).getUserId());
-				//LineitemList = users.get(0).getLineitems();
+			//	String q = ""; insert into lineitem table 
 			}
 		}finally{
 			em.close();  
@@ -122,9 +122,9 @@ public class login extends HttpServlet {
 		//add the record count to a session
 		HttpSession session = request.getSession();
 		session.setAttribute("myUser", myUser);
-		request.setAttribute("LineitemList", LineitemList);
-		boolean loginFlag = true;
-		session.setAttribute("loginFlag", loginFlag);
+		
+	
+		session.setAttribute("loginFlag", true);
 		getServletContext()
 		.getRequestDispatcher("/ShopCartServlet")
 		.forward(request, response);

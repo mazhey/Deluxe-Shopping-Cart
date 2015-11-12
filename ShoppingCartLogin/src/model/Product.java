@@ -18,8 +18,9 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRODUCTS_GENERATOR", sequenceName="PRODUCTS_SEQ",schema= "TESTUSERDB",allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="PRODUCTS_GENERATOR")
+	@SequenceGenerator(name="PRODUCTS_PRODUCTID_GENERATOR",sequenceName="PRODUCTS_SEQ1",schema= "TESTUSERDB",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.AUTO,generator="PRODUCTS_PRODUCTID_GENERATOR")
+
 	@Column(name="PRODUCT_ID")
 	private long productId;
 
@@ -33,7 +34,7 @@ public class Product implements Serializable {
 	private String productName;
 
 	@Column(name="PRODUCT_PRICE")
-	private BigDecimal productPrice;
+	private double productPrice;
 
 	public Product() {
 	}
@@ -70,11 +71,11 @@ public class Product implements Serializable {
 		this.productName = productName;
 	}
 
-	public BigDecimal getProductPrice() {
+	public double getProductPrice() {
 		return this.productPrice;
 	}
 
-	public void setProductPrice(BigDecimal productPrice) {
+	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
 	}
 

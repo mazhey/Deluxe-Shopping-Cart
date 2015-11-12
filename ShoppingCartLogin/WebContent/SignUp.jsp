@@ -44,7 +44,27 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">ShoppingCart SignUp!</a>
+                <c:if test="${loginFlag== true}">
+          <a class="navbar-brand">ShoppingCart!</a> 
+             </c:if>
+                <c:if test="${loginFlag!= true}">
+          <a class="navbar-brand" href="index.html">ShoppingCart!</a> 
+             </c:if>
+         
+          <a class="navbar-brand" href="ShopCartServlet">Products Pool</a>
+          <c:if test="${loginFlag== true}">
+          <a class="navbar-brand" href="#">${myUser.username}</a>
+          </c:if>
+           <c:if test="${loginFlag == true }">
+				     <a class="navbar-brand">ShoppingCart SignUp!</a>
+       		</c:if>
+          
+          <c:if test="${loginFlag == true }">
+				<a class="navbar-brand" href="LogoutServlet">Log Out</a>
+       		</c:if>
+          
+      
+          
         </div>
 
       </div>
@@ -75,10 +95,7 @@
     <label for="exampleInputPassword1">Password</label>
     <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
   </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email</label>
-    <input type="email" class="form-control" name="email" id="email" placeholder="email" required>
-  </div>
+
   
  	
 				<br>

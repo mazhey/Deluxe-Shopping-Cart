@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Lineitem;
+import model.Shoppinguser;
 
 
 /**
@@ -60,16 +61,15 @@ public class decisionShopping extends HttpServlet {
 		double subtotal = quantity*productprice;
 		System.out.println(quantity);
 		Lineitem myLineitem = new Lineitem();
-		//myLineitem.setLineitemId(1);
+		HttpSession session = request.getSession();
 		myLineitem.setProductId(productID);
 		myLineitem.setProductDate(strproductDate);
 		myLineitem.setProductQuantity(quantity);
 		myLineitem.setProductUnitprice(productprice);
 		myLineitem.setProductDate(strproductDate);
 		myLineitem.setProductPrice(subtotal);
-		//myLineitem.setUserId(1);
+	   if ((session.getAttribute("loginFlag"))!= null && (boolean)session.getAttribute("loginFlag")==true){
 		LineitemDB.insert(myLineitem);
-		
 		LineitemJB lineitemJB= new LineitemJB();
 		lineitemJB.setDate(strproductDate);
 		lineitemJB.setProductId(productid);
@@ -77,9 +77,10 @@ public class decisionShopping extends HttpServlet {
 		lineitemJB.setProductname(strproductName);
 		lineitemJB.setUnitPrice(productprice);
 		lineitemJB.setQuantity(quantity);
-	
-		ArrayList<LineitemJB> MyshoppingCart;
-		 HttpSession session = request.getSession();
+		Shoppinguser u= (Shoppinguser)session.getAttribute("myUser");
+		lineitemJB.setUserId(u.getUserId());
+        ArrayList<LineitemJB> MyshoppingCart;
+		
 		MyshoppingCart=(ArrayList<LineitemJB>) session.getAttribute("MyshoppingCart");
 		if(MyshoppingCart == null){
 			MyshoppingCart = new ArrayList<LineitemJB>();
@@ -89,9 +90,39 @@ public class decisionShopping extends HttpServlet {
 		 for(int i=0;i< MyshoppingCart.size();i++){
 			 total+=MyshoppingCart.get(i).getPrice();
 		 }
-		 
 			session.setAttribute("MyshoppingCart",  MyshoppingCart);
 			request.setAttribute("GrandTotal", total);
+	    }
+		 else{
+			 
+			 LineitemJB lineitemJB= new LineitemJB();
+				lineitemJB.setDate(strproductDate);
+				lineitemJB.setProductId(productid);
+				lineitemJB.setPrice(subtotal);
+				lineitemJB.setProductname(strproductName);
+				lineitemJB.setUnitPrice(productprice);
+				lineitemJB.setQuantity(quantity);
+				Shoppinguser u= (Shoppinguser)session.getAttribute("myUser");
+				lineitemJB.setUserId(0);
+		        ArrayList<LineitemJB> MyshoppingCart;
+				
+				MyshoppingCart=(ArrayList<LineitemJB>) session.getAttribute("MyshoppingCart");
+				if(MyshoppingCart == null){
+					MyshoppingCart = new ArrayList<LineitemJB>();
+				}
+				 MyshoppingCart.add(lineitemJB);
+				 double total=0;
+				 for(int i=0;i< MyshoppingCart.size();i++){
+					 total+=MyshoppingCart.get(i).getPrice();
+				 }
+					session.setAttribute("MyshoppingCart",  MyshoppingCart);
+					request.setAttribute("GrandTotal", total);
+			 
+		 }
+		 
+		
+	
+		
 		
 		 try {
 				getServletContext().getRequestDispatcher("/shoppingCartList.jsp").forward(request, response);

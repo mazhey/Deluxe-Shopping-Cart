@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -10,14 +11,15 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="SHOPPINGUSER",schema= "TESTUSERDB")
+@Table(name="SHOPPINGUSER",schema="TESTUSERDB")
 @NamedQuery(name="Shoppinguser.findAll", query="SELECT s FROM Shoppinguser s")
 public class Shoppinguser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SHOPPINGUSER_GENERATOR", sequenceName="SHOPPINGUSER_SEQ",schema= "TESTUSERDB",allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="SHOPPINGUSER_GENERATOR")
+	@SequenceGenerator(name="SHOPPINGUSER_USERID_GENERATOR",sequenceName="SHOPPINGUSER_SEQ1",schema= "TESTUSERDB",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.AUTO,generator="SHOPPINGUSER_USERID_GENERATOR")
+
 	@Column(name="USER_ID")
 	private long userId;
 
@@ -26,6 +28,7 @@ public class Shoppinguser implements Serializable {
 	private String password;
 
 	private String username;
+	
 
 	public Shoppinguser() {
 	}
@@ -61,5 +64,6 @@ public class Shoppinguser implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 
 }

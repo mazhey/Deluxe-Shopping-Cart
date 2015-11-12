@@ -30,25 +30,22 @@
           </button>
           
            <c:if test="${loginFlag== true}">
-          <a class="navbar-brand">Twitter!</a> 
+          <a class="navbar-brand">ShoppingCart!</a> 
              </c:if>
                 <c:if test="${loginFlag!= true}">
-          <a class="navbar-brand" href="index.html">Twitter!</a> 
+          <a class="navbar-brand" href="index.html">ShoppingCart!</a> 
              </c:if>
-          <c:if test="${loginFlag== true}">
-           <a class="navbar-brand" href="NewTweet.jsp">Share a Tweet!</a>
-         </c:if>
          
-          <a class="navbar-brand" href="http://localhost:8080/BullhornWebApplication/tweetServlet">Tweets</a>
+          <a class="navbar-brand" href="ShopCartServlet">Products Pool</a>
           <c:if test="${loginFlag== true}">
-          <a class="navbar-brand" href="http://localhost:8080/BullhornWebApplication/UserProfileServlet?username=${myUser.username}">Profile</a>
+          <a class="navbar-brand" href="#">${myUser.username}</a>
           </c:if>
-          <c:if test="${ loginFlag == true }">
+          <c:if test="${loginFlag == true }">
 				<a class="navbar-brand" href="LogoutServlet">Log Out</a>
        		</c:if>
          
          
-          <a class="navbar-brand">Lineitems List </a> 
+        
            
               
         </div>
@@ -90,7 +87,13 @@
 <br>
 
   <a href = "ShopCartServlet" class="btn btn-info">Continue</a>
- <a href = "#" class="btn btn-info">Checkout</a>
+   <c:if test="${loginFlag!= true}">
+  <a href = "Index.html" class="btn btn-info">Checkout</a>
+  	</c:if>
+    <c:if test="${loginFlag== true}">
+  <a href = "#" class="btn btn-info">Checkout</a>
+  	</c:if>	
+  	
   </div>
   </div>
   </div>
