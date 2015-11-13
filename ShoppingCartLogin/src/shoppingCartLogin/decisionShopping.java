@@ -32,6 +32,10 @@ public class decisionShopping extends HttpServlet {
 		String action = request.getParameter("action");
 		if (action.equals("Add")){
 		processAdd(request,response);}
+		else if(action.equals("RateReview")){
+			processRateReview(request,response);
+		}
+		
 	}
 
 	
@@ -62,13 +66,16 @@ public class decisionShopping extends HttpServlet {
 		System.out.println(quantity);
 		Lineitem myLineitem = new Lineitem();
 		HttpSession session = request.getSession();
+		myLineitem.setProductName(strproductName);
 		myLineitem.setProductId(productID);
 		myLineitem.setProductDate(strproductDate);
 		myLineitem.setProductQuantity(quantity);
 		myLineitem.setProductUnitprice(productprice);
 		myLineitem.setProductDate(strproductDate);
 		myLineitem.setProductPrice(subtotal);
-	   if ((session.getAttribute("loginFlag"))!= null && (boolean)session.getAttribute("loginFlag")==true){
+		Shoppinguser u= (Shoppinguser)session.getAttribute("myUser");
+		myLineitem.setUserId((int) (u.getUserId()));
+	   if ((session.getAttribute("myUser"))!= null){
 		LineitemDB.insert(myLineitem);
 		LineitemJB lineitemJB= new LineitemJB();
 		lineitemJB.setDate(strproductDate);
@@ -77,7 +84,7 @@ public class decisionShopping extends HttpServlet {
 		lineitemJB.setProductname(strproductName);
 		lineitemJB.setUnitPrice(productprice);
 		lineitemJB.setQuantity(quantity);
-		Shoppinguser u= (Shoppinguser)session.getAttribute("myUser");
+		
 		lineitemJB.setUserId(u.getUserId());
         ArrayList<LineitemJB> MyshoppingCart;
 		
@@ -92,6 +99,11 @@ public class decisionShopping extends HttpServlet {
 		 }
 			session.setAttribute("MyshoppingCart",  MyshoppingCart);
 			request.setAttribute("GrandTotal", total);
+			session.setAttribute("ItemsInCart", MyshoppingCart.size() );
+			double Total=0;
+			Total=total*(1+0.06);
+			session.setAttribute("FinalPay",  Total);
+			System.out.println(session.getAttribute("FinalPay")); 
 	    }
 		 else{
 			 
@@ -102,7 +114,7 @@ public class decisionShopping extends HttpServlet {
 				lineitemJB.setProductname(strproductName);
 				lineitemJB.setUnitPrice(productprice);
 				lineitemJB.setQuantity(quantity);
-				Shoppinguser u= (Shoppinguser)session.getAttribute("myUser");
+				//Shoppinguser u= (Shoppinguser)session.getAttribute("myUser");
 				lineitemJB.setUserId(0);
 		        ArrayList<LineitemJB> MyshoppingCart;
 				
@@ -134,6 +146,29 @@ public class decisionShopping extends HttpServlet {
 				e.printStackTrace();
 			}
 		
+	}
+	
+	protected void processRateReview(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EntityManager em = shoppingCartLogin.DBUtil.getEmFactory().createEntityManager();
+		String strproductID = request.getParameter("productID");
+		String strproductName = request.getParameter("productName");
+		String strproductDate = request.getParameter("productDate");
+		String  mycomment = request.getParameter("comment");
+		String myrate=request.getParameter("rate");
+		request.setAttribute("ProductID",strproductID );
+		request.setAttribute("ProductName",strproductName );
+		request.setAttribute("ProductDate",strproductDate );
+		request.setAttribute("ProductComment", mycomment );
+		request.setAttribute("ProductRate",myrate );
+		 try {
+				getServletContext().getRequestDispatcher("/rateRiew.jsp").forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 
 }

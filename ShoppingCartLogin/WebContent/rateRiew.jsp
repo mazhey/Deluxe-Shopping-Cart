@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Product Lists</title>
+<title>Insert title here</title>
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
 	integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
@@ -17,6 +17,7 @@
 	crossorigin="anonymous">
 </head>
 <body>
+
 <div class="container">
 <nav class="navbar navbar-default">
       <div class="container">
@@ -28,11 +29,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          
-        <c:if test="${not empty myUser}">
+           <c:if test="${not empty myUser}">
           <a class="navbar-brand">ShoppingCart!</a> 
              </c:if>
-                <c:if test="${empty myUser}">
+                <c:if test="${ empty myUser}">
           <a class="navbar-brand" href="Index.html">ShoppingCart!</a> 
              </c:if>
          
@@ -40,45 +40,49 @@
           <c:if test="${not empty myUser}">
           <a class="navbar-brand" href="#">${myUser.username}</a>
           </c:if>
-          <c:if test="${not empty myUser}">
-				<a class="navbar-brand" href="LogoutServlet">Log Out</a>
+           <c:if test="${not empty myUser }">
+				 <a class="navbar-brand">Rate&Review Products </a> 
        		</c:if>
           
-   
-           
-              
+          <c:if test="${not empty myUser }">
+				<a class="navbar-brand" href="LogoutServlet">Log Out</a>
+       		</c:if>
+
         </div>
 
       </div>
       </div>
     </nav>
     </br >
-<div class="panel panel-default">
-
-  <div class="panel-body">
-		<table class="table table-striped">
+<table class="table table-striped">
 <thead>
 
 			<tr>
 			     <th>ProductID</th>
 				<th>ProductName</th>
-				<th>UnitPrice</th>
-		
+				<th>ProductDate</th>
+				<th>Comment</th>
+		         <th>Rate</th>
 			</tr>
 </thead>
 <tbody>
+           <tr>
+				<td><c:out value="${ProductID}" /></td>
+				<td><c:out value="${ProductName}" /></td>
+				<td><c:out value="${ProductDate}" /></td>
+				<td><c:out value="${ProductComment}" /></td>
+				<td><c:out value="${ProductRate}" /></td>
+			</tr>
 
-${tableinfo}
 
 </tbody>
 		</table>
 		
-		
- 
+<br>
+  <a href = "ShopCartServlet" class="btn btn-info">Continue</a>
   
-   </div>
-   </div>
-   </div>
+  </div>
+  
    
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script

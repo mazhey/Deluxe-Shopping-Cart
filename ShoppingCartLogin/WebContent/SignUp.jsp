@@ -44,22 +44,22 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-                <c:if test="${loginFlag== true}">
+                <c:if test="${not empty myUser}">
           <a class="navbar-brand">ShoppingCart!</a> 
              </c:if>
-                <c:if test="${loginFlag!= true}">
-          <a class="navbar-brand" href="index.html">ShoppingCart!</a> 
+                <c:if test="${ empty myUser}">
+          <a class="navbar-brand" href="Index.html">ShoppingCart!</a> 
              </c:if>
          
           <a class="navbar-brand" href="ShopCartServlet">Products Pool</a>
-          <c:if test="${loginFlag== true}">
+          <c:if test="${not empty myUser}">
           <a class="navbar-brand" href="#">${myUser.username}</a>
           </c:if>
-           <c:if test="${loginFlag == true }">
+           <c:if test="${not empty myUser }">
 				     <a class="navbar-brand">ShoppingCart SignUp!</a>
        		</c:if>
           
-          <c:if test="${loginFlag == true }">
+          <c:if test="${not empty myUser}">
 				<a class="navbar-brand" href="LogoutServlet">Log Out</a>
        		</c:if>
           

@@ -29,18 +29,18 @@
             <span class="icon-bar"></span>
           </button>
           
-           <c:if test="${loginFlag== true}">
+           <c:if test="${not empty myUser}">
           <a class="navbar-brand">ShoppingCart!</a> 
              </c:if>
-                <c:if test="${loginFlag!= true}">
-          <a class="navbar-brand" href="index.html">ShoppingCart!</a> 
+                <c:if test="${empty myUser}">
+          <a class="navbar-brand" href="Index.html">ShoppingCart!</a> 
              </c:if>
          
           <a class="navbar-brand" href="ShopCartServlet">Products Pool</a>
-          <c:if test="${loginFlag== true}">
+          <c:if test="${not empty myUser}">
           <a class="navbar-brand" href="#">${myUser.username}</a>
           </c:if>
-          <c:if test="${loginFlag == true }">
+          <c:if test="${not empty myUser}">
 				<a class="navbar-brand" href="LogoutServlet">Log Out</a>
        		</c:if>
          
@@ -85,13 +85,21 @@
 		
 <label>Total:</label><c:out value="${GrandTotal}" />
 <br>
+ <c:if test="${ItemsInCart==1}">
+         <p>You have 1 item in your cart</p>
+             </c:if>
 
+ <c:if test="${ItemsInCart>1}">
+         <p>You have ${ItemsInCart} items in your cart</p>
+             </c:if>
+
+ <br>
   <a href = "ShopCartServlet" class="btn btn-info">Continue</a>
-   <c:if test="${loginFlag!= true}">
+   <c:if test="${empty myUser}">
   <a href = "Index.html" class="btn btn-info">Checkout</a>
   	</c:if>
-    <c:if test="${loginFlag== true}">
-  <a href = "#" class="btn btn-info">Checkout</a>
+    <c:if test="${not empty myUser}">
+  <a href = "Confirm.jsp" class="btn btn-info">Checkout</a>
   	</c:if>	
   	
   </div>

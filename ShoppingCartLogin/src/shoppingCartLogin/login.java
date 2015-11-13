@@ -95,6 +95,11 @@ public class login extends HttpServlet {
 			throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");	
+		if(username.equalsIgnoreCase("admin")){
+			getServletContext()
+			.getRequestDispatcher("/adminServlet")
+			.forward(request, response);
+		}else{
 	     Shoppinguser myUser = new  Shoppinguser();
 		List<Lineitem> LineitemList = null;
 
@@ -124,11 +129,13 @@ public class login extends HttpServlet {
 		session.setAttribute("myUser", myUser);
 		
 	
-		session.setAttribute("loginFlag", true);
+		//session.setAttribute("loginFlag", true);
 		getServletContext()
 		.getRequestDispatcher("/ShopCartServlet")
 		.forward(request, response);
 	}
+	}
+	
 
 
 }

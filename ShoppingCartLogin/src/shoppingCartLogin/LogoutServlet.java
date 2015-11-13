@@ -41,7 +41,7 @@ public class LogoutServlet extends HttpServlet {
 		Shoppinguser u = (Shoppinguser) session.getAttribute("myUser");
 		//System.out.println(u.getFullname());
 		u = null;
-		session.setAttribute("loginFlag", false);
+		//session.setAttribute("loginFlag", false);
 		
 		session.setAttribute("myUser", u);
 		//session.invalidate();

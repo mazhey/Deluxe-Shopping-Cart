@@ -28,22 +28,22 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-           <c:if test="${loginFlag== true}">
+           <c:if test="${not empty myUser}">
           <a class="navbar-brand">ShoppingCart!</a> 
              </c:if>
-                <c:if test="${loginFlag!= true}">
-          <a class="navbar-brand" href="index.html">ShoppingCart!</a> 
+                <c:if test="${ empty myUser}">
+          <a class="navbar-brand" href="Index.html">ShoppingCart!</a> 
              </c:if>
          
           <a class="navbar-brand" href="ShopCartServlet">Products Pool</a>
-          <c:if test="${loginFlag== true}">
+          <c:if test="${not empty myUser}">
           <a class="navbar-brand" href="#">${myUser.username}</a>
           </c:if>
-           <c:if test="${loginFlag == true }">
+           <c:if test="${not empty myUser }">
 				 <a class="navbar-brand">Selected Products </a> 
        		</c:if>
           
-          <c:if test="${loginFlag == true }">
+          <c:if test="${not empty myUser }">
 				<a class="navbar-brand" href="LogoutServlet">Log Out</a>
        		</c:if>
           
@@ -93,6 +93,47 @@
   
   <button type="submit" class="btn btn-info">Add</button>
   </form>	
+  
+  <form action = "decisionShopping" method= "post">
+    <input type="hidden" name="action" value="RateReview">
+					<div class="container" style="width:70%;margin:auto;">
+						<div class="form-group">
+							<label for="exampleTweet">Comment</label>
+							<textarea maxlength="140" type="text" class="form-control"
+								row="3" id="comment" name="comment"
+								placeholder="Comments your product" style="width:400px;"> </textarea>
+						</div>
+						
+						
+	<div class="dropdown">
+  
+  
+  Rate Product :<br>
+ 
+
+
+   <select name = "rate">
+   
+<option value="1">1 (Poor)</option>
+  <option value="2">2 (Okay)</option>
+  <option value="3">3 (Moderate)</option>
+  <option value="4">4 (Good)</option>
+  <option value="5">5 (Excellent)</option>
+ 
+   </select>  
+
+</div>
+  <input type = "hidden" value = "${selectedProduct.getProductId()}" name ="productID">
+  <input type = "hidden" value = "${selectedProduct.getProductName()}" name ="productName">
+   <input type = "hidden" value = "${selectedProduct.getProductPrice()}" name ="productPrice">
+ <input type = "hidden" value = "${selectedProduct.getProductDate()}" name ="productDate">
+ <input type = "hidden" value = "${selectedProduct.getProductDescription()}" name ="productDescription">
+						<p>
+							<button type="submit" class="btn btn-default">Submit</button>
+						</p>
+					</div>
+				</form>
+  
   </div>
   </div>
   </div>
@@ -110,3 +151,4 @@
 		crossorigin="anonymous"></script>
    
 </body>
+</html>

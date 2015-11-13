@@ -29,10 +29,10 @@
             <span class="icon-bar"></span>
           </button>
           
-        <c:if test="${not empty myUser}">
+           <c:if test="${not empty myUser}">
           <a class="navbar-brand">ShoppingCart!</a> 
              </c:if>
-                <c:if test="${empty myUser}">
+                <c:if test="${ empty myUser}">
           <a class="navbar-brand" href="Index.html">ShoppingCart!</a> 
              </c:if>
          
@@ -60,10 +60,10 @@
 <thead>
 
 			<tr>
-			     <th>ProductID</th>
+			    <th>ProductDate</th>
 				<th>ProductName</th>
-				<th>UnitPrice</th>
-		
+				<th>productQuantity</th>
+		        <th>UserID</th>
 			</tr>
 </thead>
 <tbody>
